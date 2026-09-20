@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root[data-theme="light"] {
+  --bg: #F6F5F2;            /* Papel editorial marfil */
+  --surface: #FFFFFF;       /* Blanco puro para tarjetas */
+  --text: #111113;          /* Tinta negra */
+  --text-muted: #666660;    /* Tinta deslavada */
+  --accent: #E6005C;        /* Magenta / Fucsia editorial profundo */
+  --line: #111113;          /* Trazo fino */
+  --border: rgba(17, 17, 19, 0.12);
+}
+
+:root[data-theme="dark"] {
+  --bg: #0D0D10;            /* Grafito oscuro Studio */
+  --surface: #141418;       /* Superficie oscura suave */
+  --text: #F4F1EA;          /* Crema / Marfil */
+  --text-muted: #8E8E96;    /* Gris desaturado */
+  --accent: #FF2A7A;        /* Magenta encendido sobre oscuro */
+  --line: #F4F1EA;          /* Trazo fino claro */
+  --border: rgba(244, 241, 234, 0.14);
+}
+
+/* Clases tipográficas para la dirección de arte editorial */
+.font-serif-display {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+.font-sans-body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* Trama técnica sutil */
+.bg-grid-pattern {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Scrollbar estilizado estilo Studio */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+}
