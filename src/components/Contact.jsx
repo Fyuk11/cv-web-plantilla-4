@@ -11,12 +11,12 @@ function LinkedinIcon({ className }) {
 }
 
 export default function Contact() {
-  const { personalInfo } = portfolioData;
+  const personalInfo = portfolioData?.personalInfo || {};
 
   const contactLinks = [
     {
       label: 'Email Directo',
-      value: personalInfo.email,
+      value: personalInfo.email || 'Contacto',
       href: `mailto:${personalInfo.email}`,
       icon: Mail,
       external: false,
@@ -24,66 +24,78 @@ export default function Contact() {
     {
       label: 'WhatsApp',
       value: 'Mensaje directo',
-      href: personalInfo.whatsappLink,
+      href: personalInfo.whatsappLink || '#',
       icon: MessageSquare,
       external: true,
     },
     {
       label: 'LinkedIn',
       value: 'Perfil profesional',
-      href: personalInfo.linkedin,
+      href: personalInfo.linkedin || '#',
       icon: LinkedinIcon,
       external: true,
     },
   ];
 
   return (
-    <section id="contacto" className="border-b border-line bg-bg py-20 lg:py-28">
-      <div className="max-w-[1600px] mx-auto px-6 sm:px-10 lg:px-14">
+    // Cambiar id="contacto" por:
+<section id="comunidad" className="py-8 sm:py-12 px-4 sm:px-8 max-w-[1400px] mx-auto">
+      <div className="bg-surface border border-line rounded-3xl p-6 sm:p-10 lg:p-14 shadow-sm relative overflow-hidden">
         
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
-        >
-          {/* Columna Izquierda: Mensaje & Status de Disponibilidad */}
-          <div className="lg:col-span-5 space-y-8">
-            {/* Indicador de Disponibilidad */}
-            <div className="inline-flex items-center gap-2.5 border border-line bg-surface/30 px-3.5 py-1.5 font-sans text-xs text-text-muted">
+        {/* Trama orgánica de fondo */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none" />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+          
+          {/* Columna Izquierda */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-5 space-y-6"
+          >
+            <div className="inline-flex items-center gap-2.5 bg-bg border border-line px-3.5 py-1.5 rounded-full text-xs font-bold text-text-muted shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
               </span>
-              <span>Disponible para nuevos proyectos</span>
+              <span>Disponible para nuevos proyectos & alianzas</span>
             </div>
 
             <div className="space-y-4">
-              <h2 className="font-serifDisplay text-5xl sm:text-6xl text-text leading-[0.98]">
+              <h2 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl text-text leading-[1.05] tracking-tight">
                 ¿Hablamos de tu <br />
                 <span className="italic text-accent font-normal">próximo proyecto?</span>
               </h2>
-              <p className="font-sans text-base sm:text-lg text-text-muted font-light leading-relaxed max-w-md">
-                Escribime para evaluar propuestas, ideas o vacantes. Suelo responder en el mismo día.
+              <p className="font-sans text-xs sm:text-sm text-text-muted font-normal leading-relaxed max-w-md">
+                Escribime para evaluar consultorías, colaboraciones o propuestas educativas.
               </p>
             </div>
 
-            {/* Descarga de CV integrada como Botón Principal */}
-            <div className="pt-4">
-              <a
-                href={personalInfo.cvPdfPath}
-                download="CV_Rodrigo_Gomez.pdf"
-                className="group relative inline-flex items-center gap-3 bg-text text-bg px-8 py-4 font-sans text-xs uppercase tracking-widest font-bold rounded-none hover:bg-accent hover:text-white transition-all duration-300 w-full sm:w-auto justify-center"
-              >
-                <FileText className="w-4 h-4" />
-                <span>Descargar CV (PDF)</span>
-              </a>
-            </div>
-          </div>
+            {/* Descarga de CV */}
+            {personalInfo.cvPdfPath && (
+              <div className="pt-2">
+                <a
+                  href={personalInfo.cvPdfPath}
+                  download="CV_Rodrigo_Gomez.pdf"
+                  className="inline-flex items-center gap-3 bg-text text-bg hover:bg-accent hover:text-white px-7 py-3.5 rounded-full font-sans text-xs uppercase tracking-wider font-bold transition-all duration-300 shadow-sm w-full sm:w-auto justify-center group"
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>Descargar Perfil / CV (PDF)</span>
+                </a>
+              </div>
+            )}
+          </motion.div>
 
-          {/* Columna Derecha: Canales de Contacto en Filas Editoriales */}
-          <div className="lg:col-span-7 border border-line divide-y divide-line bg-surface/10">
+          {/* Columna Derecha */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-7 bg-bg/80 border border-line rounded-2xl divide-y divide-line/60 overflow-hidden shadow-sm"
+          >
             {contactLinks.map((item, idx) => {
               const Icon = item.icon;
               return (
@@ -92,32 +104,31 @@ export default function Contact() {
                   href={item.href}
                   target={item.external ? '_blank' : '_self'}
                   rel={item.external ? 'noopener noreferrer' : ''}
-                  className="group flex items-center justify-between p-6 sm:p-8 hover:bg-surface/50 transition-all duration-300"
+                  className="group flex items-center justify-between p-5 sm:p-6 hover:bg-surface/60 transition-all duration-300"
                 >
-                  <div className="flex items-center gap-5">
-                    <div className="p-3 border border-line/60 bg-bg group-hover:border-accent group-hover:text-accent transition-colors">
-                      <Icon className="w-5 h-5" />
+                  <div className="flex items-center gap-4 sm:gap-5">
+                    <div className="p-3 rounded-xl border border-line bg-surface group-hover:border-accent/40 group-hover:bg-accent/10 group-hover:text-accent transition-all shrink-0">
+                      <Icon className="w-5 h-5 text-text group-hover:text-accent" />
                     </div>
                     <div>
-                      <span className="block font-sans text-xs uppercase tracking-widest text-text-muted font-semibold">
+                      <span className="block font-sans text-[11px] uppercase tracking-wider text-accent font-bold">
                         {item.label}
                       </span>
-                      <span className="block font-serifDisplay text-xl sm:text-2xl text-text group-hover:text-accent transition-colors mt-0.5">
+                      <span className="block font-serif-display text-lg sm:text-2xl text-text group-hover:text-accent transition-colors mt-0.5">
                         {item.value}
                       </span>
                     </div>
                   </div>
 
-                  <div className="border border-line bg-bg p-2.5 group-hover:border-accent group-hover:bg-accent group-hover:text-white transition-all duration-300">
-                    <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <div className="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-text-muted group-hover:text-accent group-hover:border-accent/40 group-hover:bg-accent/10 transition-all shrink-0">
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </a>
               );
             })}
-          </div>
+          </motion.div>
 
-        </motion.div>
-
+        </div>
       </div>
     </section>
   );

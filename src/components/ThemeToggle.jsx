@@ -3,7 +3,7 @@ import { Sun, Moon } from 'lucide-react';
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'dark';
+    return localStorage.getItem('theme') || 'light';
   });
 
   useEffect(() => {
@@ -18,11 +18,15 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 border border-border bg-bg-alt hover:border-accent text-text transition-colors duration-200"
+      className="p-2.5 rounded-full border border-line bg-surface hover:border-accent text-text transition-all duration-300 shadow-sm flex items-center justify-center group"
       aria-label="Cambiar tema"
-      title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+      title={theme === 'dark' ? 'Modo Claro: Earthy Warm' : 'Modo Oscuro: Night Studio'}
     >
-      {theme === 'dark' ? <Sun className="w-4 h-4 text-accent" /> : <Moon className="w-4 h-4 text-accent" />}
+      {theme === 'dark' ? (
+        <Sun className="w-4 h-4 text-accent transition-transform duration-300 group-hover:rotate-45" />
+      ) : (
+        <Moon className="w-4 h-4 text-accent transition-transform duration-300 group-hover:-rotate-12" />
+      )}
     </button>
   );
 }

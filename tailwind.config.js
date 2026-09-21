@@ -10,18 +10,20 @@ export default {
       colors: {
         bg: 'var(--bg)',
         surface: 'var(--surface)',
+        'surface-hover': 'var(--surface-hover)',
         text: 'var(--text)',
         'text-muted': 'var(--text-muted)',
         accent: 'var(--accent)',
+        'accent-hover': 'var(--accent-hover)',
         line: 'var(--line)',
         border: 'var(--border)',
       },
       fontFamily: {
-        sans: ['"Inter"', 'sans-serif'],
-        display: ['"Space Grotesk"', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+        serif: ['"Instrument Serif"', 'serif'],
       },
       maxWidth: {
-        'content': '1100px',
+        'content': '1400px',
       }
     },
   },

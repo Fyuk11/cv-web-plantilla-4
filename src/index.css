@@ -2,27 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Modo Claro: Earthy Warm & Organic (Arena / Terracota / Crema) */
+:root,
 :root[data-theme="light"] {
-  --bg: #F6F5F2;            /* Papel editorial marfil */
-  --surface: #FFFFFF;       /* Blanco puro para tarjetas */
-  --text: #111113;          /* Tinta negra */
-  --text-muted: #666660;    /* Tinta deslavada */
-  --accent: #E6005C;        /* Magenta / Fucsia editorial profundo */
-  --line: #111113;          /* Trazo fino */
-  --border: rgba(17, 17, 19, 0.12);
+  --bg: #FAF8F5;
+  --surface: #FFFFFF;
+  --surface-hover: #F3F0EB;
+  --text: #1C1A19;
+  --text-muted: #655E58;
+  --accent: #D97736;
+  --accent-hover: #C06528;
+  --line: #E8E2D9;
+  --border: #E0DCD3;
 }
 
+/* Modo Oscuro: Night Studio & Dark Luxury (Espresso / Ámbar / Carbón) */
 :root[data-theme="dark"] {
-  --bg: #0D0D10;            /* Grafito oscuro Studio */
-  --surface: #141418;       /* Superficie oscura suave */
-  --text: #F4F1EA;          /* Crema / Marfil */
-  --text-muted: #8E8E96;    /* Gris desaturado */
-  --accent: #FF2A7A;        /* Magenta encendido sobre oscuro */
-  --line: #F4F1EA;          /* Trazo fino claro */
-  --border: rgba(244, 241, 234, 0.14);
+  --bg: #121110;
+  --surface: #1A1817;
+  --surface-hover: #262321;
+  --text: #F5F2ED;
+  --text-muted: #A39C94;
+  --accent: #E5A93C;
+  --accent-hover: #D4952B;
+  --line: #2E2A27;
+  --border: #3A3531;
 }
 
-/* Clases tipográficas para la dirección de arte editorial */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+}
+
+/* Clases tipográficas de la dirección de arte */
 .font-serif-display {
   font-family: 'Instrument Serif', Georgia, serif;
 }
@@ -31,19 +50,20 @@
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
-/* Trama técnica sutil */
+/* Trama orgánica sutil de puntos de fondo */
 .bg-grid-pattern {
   background-image: radial-gradient(var(--border) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-size: 24px 24px;
 }
 
-/* Scrollbar estilizado estilo Studio */
+/* Scrollbar redondeado estilo Creator Studio */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
+  border-radius: 9999px;
 }

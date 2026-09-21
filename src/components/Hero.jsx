@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDownRight } from 'lucide-react';
+import { ArrowUpRight, Sparkles, Users, Trophy, MessageCircle } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 export default function Hero() {
@@ -8,110 +8,147 @@ export default function Hero() {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <section className="border-b border-line bg-bg overflow-hidden">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-80px)]">
+    <section className="py-6 sm:py-10 px-4 sm:px-8 max-w-[1400px] mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
-        {/* Columna Izquierda: Editorial Typography & Copy */}
+        {/* Columna Izquierda: Copy + Call To Actions + Active Challenge Badge */}
         <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-7 p-6 sm:p-10 lg:p-16 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-line"
+          className="lg:col-span-7 bg-surface border border-line rounded-3xl p-6 sm:p-10 lg:p-12 flex flex-col justify-between shadow-sm relative overflow-hidden"
         >
-          {/* Header Bar */}
-          <div className="flex items-center justify-end border-b border-line/60 pb-6">
-            <span className="font-sans text-xs text-text-muted uppercase tracking-widest font-light">
-              2026 / BUENOS AIRES
-            </span>
-          </div>
+          {/* Trama orgánica de fondo */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
 
-          {/* Headline Titular con Serif Display + Inclinaciones Itálicas */}
-          <div className="py-8 lg:py-12 space-y-6">
-            <h1 className="font-serifDisplay text-6xl sm:text-7xl lg:text-8xl xl:text-9xl text-text leading-[0.88] tracking-tight">
-              Rodrigo <br />
-              <span className="italic text-accent font-normal">Gómez</span>
+          {/* Header Badge: Active Challenge Status */}
+          {personalInfo.activeChallenge && (
+            <div className="relative z-10 self-start inline-flex items-center gap-2.5 bg-bg border border-line px-4 py-2 rounded-full mb-8 shadow-sm">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-bold text-text tracking-wide uppercase">
+                {personalInfo.activeChallenge.status}:
+              </span>
+              <span className="text-xs text-accent font-semibold">
+                {personalInfo.activeChallenge.title}
+              </span>
+              <span className="text-[10px] bg-accent/15 text-accent px-2 py-0.5 rounded-full font-bold ml-1">
+                {personalInfo.activeChallenge.participants}
+              </span>
+            </div>
+          )}
+
+          {/* Copy Principal */}
+          <div className="relative z-10 space-y-6 my-auto">
+            <h1 className="font-serif-display text-5xl sm:text-7xl xl:text-8xl text-text leading-[0.95] tracking-tight">
+              {personalInfo.name.split(' ')[0]} <br />
+              <span className="italic text-accent font-normal">
+                {personalInfo.name.split(' ').slice(1).join(' ')}
+              </span>
             </h1>
 
-            <div className="max-w-xl space-y-4 pt-4 border-t border-line/40">
-              <p className="font-sans text-xs sm:text-sm uppercase tracking-widest font-bold text-text">
-                Director Creativo & Diseñador de Experiencias Web
-              </p>
-              <p className="font-sans text-sm sm:text-base text-text-muted leading-relaxed font-light">
-                Construcción de identidades digitales memorables, combinación de diseño editorial, estrategia visual y desarrollo web de alto rendimiento.
-              </p>
-            </div>
+            <p className="font-sans text-lg sm:text-xl font-medium text-text leading-snug max-w-xl">
+              {personalInfo.tagline}
+            </p>
+
+            <p className="font-sans text-sm sm:text-base text-text-muted leading-relaxed max-w-xl font-normal">
+              {personalInfo.bioShort}
+            </p>
           </div>
 
-          {/* CTA Buttons + Grid de Metadatos */}
-          <div className="space-y-8">
+          {/* Acciones & Indicadores de Impacto */}
+          <div className="relative z-10 pt-8 mt-8 border-t border-line space-y-8">
             <div className="flex flex-wrap items-center gap-4">
               <a
-                href="#proyectos"
-                className="group flex items-center gap-3 bg-text text-bg px-8 py-4 font-sans text-xs uppercase tracking-widest font-bold rounded-none hover:bg-accent hover:text-white transition-all duration-300"
+                href={personalInfo.skoolUrl || personalInfo.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-3 bg-accent hover:bg-accent-hover text-white px-7 py-4 text-xs font-bold uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
               >
-                <span>Explorar Portfolio</span>
-                <ArrowDownRight className="w-4 h-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
+                <Sparkles className="w-4 h-4" />
+                <span>Unirme a Skool</span>
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
 
               <a
                 href={personalInfo.whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-text text-text px-8 py-4 font-sans text-xs uppercase tracking-widest font-bold rounded-none hover:bg-surface transition-colors"
+                className="inline-flex items-center gap-2 border border-line bg-bg hover:bg-surface-hover text-text px-7 py-4 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300"
               >
-                Iniciar Proyecto
+                <MessageCircle className="w-4 h-4 text-accent" />
+                <span>Hablar por WhatsApp</span>
               </a>
             </div>
 
-            {/* Metadatos / Stats estilo Revista */}
-            <div className="grid grid-cols-3 border-t border-b border-line py-4">
-              <div className="pr-4 border-r border-line/40">
-                <span className="block font-serifDisplay italic text-2xl sm:text-3xl text-text">100%</span>
-                <span className="block font-sans text-[10px] uppercase tracking-wider text-text-muted mt-1">Estrategia Medida</span>
+            {/* Grid de Indicadores Rápidos */}
+            {personalInfo.indicators && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {personalInfo.indicators.map((indicator, index) => (
+                  <div key={index} className="bg-bg/80 border border-line rounded-2xl p-3.5 flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-accent shrink-0" />
+                    <span className="text-xs font-semibold text-text leading-tight">
+                      {indicator}
+                    </span>
+                  </div>
+                ))}
               </div>
-              <div className="px-4 border-r border-line/40">
-                <span className="block font-serifDisplay italic text-2xl sm:text-3xl text-text">05-07</span>
-                <span className="block font-sans text-[10px] uppercase tracking-wider text-text-muted mt-1">Días de Ejecución</span>
-              </div>
-              <div className="pl-4">
-                <span className="block font-serifDisplay italic text-2xl sm:text-3xl text-accent">High-End</span>
-                <span className="block font-sans text-[10px] uppercase tracking-wider text-text-muted mt-1">Acabado Editorial</span>
-              </div>
-            </div>
+            )}
           </div>
         </motion.div>
 
-        {/* Columna Derecha: Imagen Agrandada en PC */}
+        {/* Columna Derecha: Tarjeta de Perfil & Métricas Flotantes */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7 }}
-          className="lg:col-span-5 bg-surface/20 relative flex items-center justify-center p-4 sm:p-6 lg:p-8 min-h-[550px] lg:min-h-full group cursor-pointer overflow-hidden"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="lg:col-span-5 flex flex-col justify-between gap-6"
         >
-          {/* Contenedor amplia de la foto */}
-          <div className="relative w-full max-w-[560px] aspect-[4/5] border border-line p-3 sm:p-4 bg-bg transition-all duration-500 group-hover:border-accent">
-            
-            {/* Capa Trasera Desplazada */}
-            <div className="absolute inset-0 border border-accent/40 translate-x-3 translate-y-3 -z-10 group-hover:translate-x-1.5 group-hover:translate-y-1.5 transition-transform duration-500 ease-out" />
-
-            {/* Ventana de la Imagen */}
-            <div className="relative w-full h-full overflow-hidden bg-surface">
+          {/* Tarjeta con Foto de Perfil */}
+          <div className="bg-surface border border-line rounded-3xl p-4 sm:p-6 relative flex-1 flex items-center justify-center overflow-hidden group shadow-sm min-h-[420px]">
+            <div className="relative w-full h-full min-h-[380px] rounded-2xl overflow-hidden bg-bg border border-line">
               {!imgError ? (
                 <img
                   src="/profile.png"
-                  alt="Rodrigo Gómez"
+                  alt={personalInfo.name}
                   onError={() => setImgError(true)}
-                  className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               ) : (
                 <div className="w-full h-full flex flex-col justify-center items-center text-center p-6 text-text-muted font-sans text-xs">
-                  <span>[Imagen de perfil]</span>
-                  <span className="mt-2 text-[10px] opacity-60">Cargá tu imagen en /public/profile.png</span>
+                  <Users className="w-8 h-8 text-accent mb-2" />
+                  <span>[Foto de Perfil]</span>
+                  <span className="mt-1 text-[10px] opacity-60">Cargá tu foto en /public/profile.png</span>
                 </div>
               )}
 
-              {/* Tint de color tenue en Hover */}
+              {/* Overlay suave en Hover */}
               <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              {/* Tag Flotante Superior */}
+              <div className="absolute top-4 left-4 bg-surface/90 backdrop-blur-md border border-line px-3.5 py-1.5 rounded-full text-xs font-bold text-text shadow-sm flex items-center gap-2">
+                <Trophy className="w-3.5 h-3.5 text-accent" />
+                <span>Skool Top Creator</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Tarjeta Inferior de Métricas Rápidas */}
+          <div className="bg-surface border border-line rounded-3xl p-6 shadow-sm grid grid-cols-2 gap-4">
+            <div className="bg-bg border border-line rounded-2xl p-4 text-center">
+              <span className="block font-serif-display italic text-3xl sm:text-4xl text-accent font-semibold">
+                +15K
+              </span>
+              <span className="block text-[11px] font-bold text-text-muted uppercase tracking-wider mt-1">
+                Miembros en Comunidad
+              </span>
+            </div>
+            <div className="bg-bg border border-line rounded-2xl p-4 text-center">
+              <span className="block font-serif-display italic text-3xl sm:text-4xl text-text font-semibold">
+                98%
+              </span>
+              <span className="block text-[11px] font-bold text-text-muted uppercase tracking-wider mt-1">
+                Retención en Challenges
+              </span>
             </div>
           </div>
 

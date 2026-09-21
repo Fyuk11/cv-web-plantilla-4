@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { portfolioData } from '../data/portfolioData';
 
@@ -7,90 +7,118 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Sobre mí', href: '#sobre-mi' },
-    { name: 'Especialidades', href: '#stack' },
-    { name: 'Proyectos', href: '#proyectos' },
-    { name: 'Trayectoria', href: '#experiencia' },
-    { name: 'Contacto', href: '#contacto' },
+    { name: 'Filosofía', href: '#filosofia' },
+    { name: 'Pilares', href: '#pilares' },
+    { name: 'Programas', href: '#programas' },
+    { name: 'Trayectoria', href: '#trayectoria' },
+    { name: 'Comunidad', href: '#comunidad' },
   ];
 
+  const primaryActionUrl = portfolioData?.personalInfo?.skoolUrl || portfolioData?.personalInfo?.whatsappLink || '#contacto';
+
   return (
-    <header className="sticky top-0 z-50 bg-bg/90 backdrop-blur-md border-b border-line transition-colors duration-300">
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between">
+    <header className="sticky top-4 z-50 w-full px-4 sm:px-8 max-w-[1400px] mx-auto">
+      {/* Píldora Flotante Principal */}
+      <div className="bg-surface/85 backdrop-blur-md border border-line shadow-md hover:shadow-lg rounded-full px-4 sm:px-6 py-3 flex items-center justify-between transition-all duration-300">
         
-        {/* Monograma Editorial */}
+        {/* Isotipo & Marca */}
         <a href="#" className="flex items-center gap-3 group">
-          <span className="w-3 h-3 bg-accent rounded-none group-hover:scale-125 transition-transform" />
-          <span className="font-serifDisplay italic text-2xl sm:text-3xl tracking-tight text-text">
-            Rodrigo Gómez
-          </span>
-          <span className="hidden sm:inline-block font-sans text-[10px] tracking-widest uppercase opacity-50 border-l border-line pl-3">
-            STUDIO 2026
-          </span>
+          <div className="w-9 h-9 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent font-serif-display text-lg font-bold transition-transform group-hover:scale-105">
+            RG
+          </div>
+          <div className="flex flex-col">
+            <span className="font-serif-display italic text-xl sm:text-2xl font-semibold leading-none text-text">
+              {portfolioData?.personalInfo?.name || "Rodrigo Gómez"}
+            </span>
+            <span className="flex items-center gap-1.5 text-[10px] font-sans text-text-muted tracking-wider uppercase mt-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Community Architect
+            </span>
+          </div>
         </a>
 
-        {/* Navigation Desktop */}
-        <nav className="hidden md:flex items-center h-full">
+        {/* Navegación Desktop */}
+        <nav className="hidden lg:flex items-center gap-1 bg-bg/60 border border-line/60 rounded-full px-3 py-1.5">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="h-full flex items-center px-6 font-sans text-xs tracking-wider uppercase text-text/80 hover:text-accent hover:bg-surface/50 border-r border-line/40 transition-all duration-200"
+              className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide text-text-muted hover:text-text hover:bg-surface transition-all duration-200"
             >
-              <span>{link.name}</span>
+              {link.name}
             </a>
           ))}
-
-          <div className="flex items-center gap-4 pl-6">
-            <ThemeToggle />
-            <a
-              href={portfolioData.personalInfo.cvPdfPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 border border-text bg-text text-bg px-4 py-2 text-xs font-sans font-semibold tracking-wider uppercase rounded-none hover:bg-accent hover:border-accent hover:text-white transition-colors"
-            >
-              <span>CV Editorial</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
         </nav>
 
+        {/* Acciones Desktop */}
+        <div className="hidden sm:flex items-center gap-3">
+          <ThemeToggle />
+          <a
+            href={primaryActionUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white text-xs font-semibold px-4 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Unirme a Skool</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+        </div>
+
         {/* Trigger Mobile */}
-        <div className="flex md:hidden items-center gap-3">
+        <div className="flex sm:hidden items-center gap-2">
           <ThemeToggle />
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2 border border-text bg-bg text-text rounded-none"
-            aria-label="Toggle menu"
+            className="p-2.5 rounded-full border border-line bg-surface text-text shadow-sm hover:border-accent transition-colors"
+            aria-label="Abrir menú"
           >
-            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMenuOpen ? <X className="w-5 h-5 text-accent" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Drawer Mobile */}
+      {/* Menú Desplegable Mobile */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-line bg-bg px-6 py-8 space-y-4 font-sans text-sm">
-          {navLinks.map((link) => (
+        <div className="sm:hidden mt-2 bg-surface/95 backdrop-blur-xl border border-line rounded-3xl p-5 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-3 duration-200">
+          <nav className="flex flex-col space-y-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center justify-between text-text text-sm font-semibold py-3 px-4 rounded-2xl hover:bg-surface-hover hover:text-accent transition-all"
+              >
+                <span>{link.name}</span>
+                <ArrowUpRight className="w-4 h-4 text-text-muted" />
+              </a>
+            ))}
+          </nav>
+
+          <div className="pt-2 border-t border-line space-y-2">
             <a
-              key={link.name}
-              href={link.href}
+              href={primaryActionUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center justify-between text-text uppercase tracking-widest py-3 border-b border-line/30 hover:text-accent transition-colors"
+              className="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-hover text-white py-3 rounded-full text-xs font-bold tracking-wider uppercase shadow-md transition-all"
             >
-              <span>{link.name}</span>
-              <ArrowUpRight className="w-4 h-4 text-text-muted" />
+              <Sparkles className="w-4 h-4" />
+              <span>Unirme a Skool</span>
+              <ArrowUpRight className="w-4 h-4" />
             </a>
-          ))}
-          <a
-            href={portfolioData.personalInfo.cvPdfPath}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full border border-text bg-text text-bg py-3 text-xs uppercase font-bold tracking-widest mt-4 rounded-none"
-          >
-            <span>Descargar CV (PDF)</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
+            {portfolioData?.personalInfo?.cvPdfPath && (
+              <a
+                href={portfolioData.personalInfo.cvPdfPath}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full border border-line bg-surface text-text-muted hover:text-text py-2.5 rounded-full text-xs font-semibold tracking-wide transition-colors"
+              >
+                <span>Ver CV (PDF)</span>
+              </a>
+            )}
+          </div>
         </div>
       )}
     </header>

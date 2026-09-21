@@ -9,7 +9,6 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
-  // Forzar el inicio de la página arriba de todo al recargar
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
@@ -21,7 +20,7 @@ export default function App() {
     <div className="min-h-screen bg-bg text-text selection:bg-accent selection:text-white flex flex-col justify-between">
       <div>
         <Navbar />
-        <main className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+        <main className="w-full">
           <Hero />
           <About />
           <Stack />
