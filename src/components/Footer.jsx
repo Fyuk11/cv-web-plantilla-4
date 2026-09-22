@@ -1,26 +1,35 @@
 import { ArrowUp } from 'lucide-react';
+import { portfolioData } from '../data/portfolioData';
 
 export default function Footer() {
+  const personalInfo = portfolioData?.personalInfo || {};
+  const name = personalInfo.name || personalInfo.fullName || 'Dr. Julián Benítez';
+  
+  // Separar nombre y apellido para aplicar la itálica dorada al apellido
+  const nameParts = name.split(' ');
+  const firstName = nameParts.slice(0, -1).join(' ') || nameParts[0];
+  const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : '';
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="w-full border-t border-line bg-surface/30 mt-16 sm:mt-24 relative overflow-hidden">
+    <footer className="w-full border-t border-line bg-surface/40 mt-16 sm:mt-24 relative overflow-hidden">
       {/* Trama tenue de fondo */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-14 pt-12 sm:pt-16 pb-8 relative z-10 space-y-10">
         
-        {/* Bloque Superior: Marca / Mensaje de Cierre & Botón Volver Arriba */}
+        {/* Bloque Superior: Marca & Botón Volver Arriba */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 pb-10 border-b border-line/60">
           
           <div className="space-y-3 max-w-xl">
             <span className="font-serif-display text-3xl sm:text-4xl lg:text-5xl text-text tracking-tight block">
-              Rodrigo <span className="italic text-accent font-normal">Gómez</span>
+              {firstName} {lastName && <span className="italic text-accent font-normal">{lastName}</span>}
             </span>
             <p className="font-sans text-xs sm:text-sm text-text-muted font-normal leading-relaxed">
-              Creator, Educator & Community Lead · Impulsando proyectos digitales, cultura de comunidad y educación respetuosa desde Buenos Aires, Argentina.
+              {personalInfo.title || 'Abogado & Consultor Corporativo'} · {personalInfo.matricula || 'T° CXXI F° 890 - C.P.A.C.F.'} · Especializado en Propiedad Intelectual, M&A y Derecho Tecnológico.
             </p>
           </div>
 
@@ -40,9 +49,9 @@ export default function Footer() {
 
         {/* Bloque Inferior: Copyright & Créditos */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs text-text-muted font-normal">
-          <p>© {new Date().getFullYear()} Rodrigo Gómez. Todos los derechos reservados.</p>
-          <p>
-            Construido con <span className="text-text font-bold">React</span>, <span className="text-text font-bold">Tailwind CSS</span> &amp; <span className="text-accent font-bold">Framer Motion</span>.
+          <p>© {new Date().getFullYear()} {name}. Todos los derechos reservados.</p>
+          <p className="text-text-muted/80">
+            Diseñado para <span className="text-text font-medium">Rodrigo Gomez</span>.
           </p>
         </div>
 

@@ -2,31 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modo Claro: Earthy Warm & Organic (Arena / Terracota / Crema) */
+/* Modo Claro: Warm Ivory & Bone (Crema Suave / Negro Mate / Bronce) */
 :root,
 :root[data-theme="light"] {
-  --bg: #FAF8F5;
+  --bg: #F7F5F0;
   --surface: #FFFFFF;
-  --surface-hover: #F3F0EB;
-  --text: #1C1A19;
-  --text-muted: #655E58;
-  --accent: #D97736;
-  --accent-hover: #C06528;
-  --line: #E8E2D9;
-  --border: #E0DCD3;
+  --surface-hover: #EFECE6;
+  --text: #141414;
+  --text-muted: #66625D;
+  --accent: #B8860B;
+  --accent-hover: #996515;
+  --line: #E5E0D8;
+  --border: #D6D0C4;
 }
 
-/* Modo Oscuro: Night Studio & Dark Luxury (Espresso / Ámbar / Carbón) */
+/* Modo Oscuro: Deep Obsidian & Carbon (Negro Negro / Grafito / Dorado Templado) */
 :root[data-theme="dark"] {
-  --bg: #121110;
-  --surface: #1A1817;
-  --surface-hover: #262321;
-  --text: #F5F2ED;
-  --text-muted: #A39C94;
-  --accent: #E5A93C;
-  --accent-hover: #D4952B;
-  --line: #2E2A27;
-  --border: #3A3531;
+  --bg: #0A0A0B;
+  --surface: #141416;
+  --surface-hover: #1F1F22;
+  --text: #F4F3F1;
+  --text-muted: #8E8D8A;
+  --accent: #C5A059;
+  --accent-hover: #D4AF37;
+  --line: #222225;
+  --border: #313136;
 }
 
 @layer base {
@@ -41,22 +41,22 @@
   }
 }
 
-/* Clases tipográficas de la dirección de arte */
+/* Clases tipográficas de la dirección de arte corporativa */
 .font-serif-display {
-  font-family: 'Instrument Serif', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
 }
 
 .font-sans-body {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
-/* Trama orgánica sutil de puntos de fondo */
+/* Trama sutil de puntos de fondo */
 .bg-grid-pattern {
   background-image: radial-gradient(var(--border) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
-/* Scrollbar redondeado estilo Creator Studio */
+/* Scrollbar estilizado */
 ::-webkit-scrollbar {
   width: 6px;
 }

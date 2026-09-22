@@ -12,25 +12,26 @@ function LinkedinIcon({ className }) {
 
 export default function Contact() {
   const personalInfo = portfolioData?.personalInfo || {};
+  const name = personalInfo.name || personalInfo.fullName || 'Dr. Julián Benítez';
 
   const contactLinks = [
     {
       label: 'Email Directo',
-      value: personalInfo.email || 'Contacto',
-      href: `mailto:${personalInfo.email}`,
+      value: personalInfo.email || 'j.benitez@estudio-benitez.com',
+      href: `mailto:${personalInfo.email || 'j.benitez@estudio-benitez.com'}`,
       icon: Mail,
       external: false,
     },
     {
-      label: 'WhatsApp',
-      value: 'Mensaje directo',
+      label: 'WhatsApp Profesional',
+      value: 'Consulta prioritaria',
       href: personalInfo.whatsappLink || '#',
       icon: MessageSquare,
       external: true,
     },
     {
       label: 'LinkedIn',
-      value: 'Perfil profesional',
+      value: 'Perfil institucional',
       href: personalInfo.linkedin || '#',
       icon: LinkedinIcon,
       external: true,
@@ -38,12 +39,11 @@ export default function Contact() {
   ];
 
   return (
-    // Cambiar id="contacto" por:
-<section id="comunidad" className="py-8 sm:py-12 px-4 sm:px-8 max-w-[1400px] mx-auto">
+    <section id="contacto" className="py-12 sm:py-20 px-4 sm:px-8 max-w-[1400px] mx-auto">
       <div className="bg-surface border border-line rounded-3xl p-6 sm:p-10 lg:p-14 shadow-sm relative overflow-hidden">
         
-        {/* Trama orgánica de fondo */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none" />
+        {/* Trama de fondo tenue */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           
@@ -55,40 +55,41 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-5 space-y-6"
           >
+            {/* Badge Status */}
             <div className="inline-flex items-center gap-2.5 bg-bg border border-line px-3.5 py-1.5 rounded-full text-xs font-bold text-text-muted shadow-sm">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
               </span>
-              <span>Disponible para nuevos proyectos & alianzas</span>
+              <span>Disponible para consultas corporativas</span>
             </div>
 
             <div className="space-y-4">
               <h2 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl text-text leading-[1.05] tracking-tight">
-                ¿Hablamos de tu <br />
-                <span className="italic text-accent font-normal">próximo proyecto?</span>
+                Iniciemos la <br />
+                <span className="italic text-accent font-normal">conversación.</span>
               </h2>
               <p className="font-sans text-xs sm:text-sm text-text-muted font-normal leading-relaxed max-w-md">
-                Escribime para evaluar consultorías, colaboraciones o propuestas educativas.
+                Coordinemos una reunión inicial para evaluar asuntos corporativos, propiedad intelectual o representación legal estratégica.
               </p>
             </div>
 
-            {/* Descarga de CV */}
+            {/* Descarga de CV / Brochure */}
             {personalInfo.cvPdfPath && (
               <div className="pt-2">
                 <a
                   href={personalInfo.cvPdfPath}
-                  download="CV_Rodrigo_Gomez.pdf"
+                  download={`Perfil_Profesional_${name.replace(/\s+/g, '_')}.pdf`}
                   className="inline-flex items-center gap-3 bg-text text-bg hover:bg-accent hover:text-white px-7 py-3.5 rounded-full font-sans text-xs uppercase tracking-wider font-bold transition-all duration-300 shadow-sm w-full sm:w-auto justify-center group"
                 >
                   <FileText className="w-4 h-4" />
-                  <span>Descargar Perfil / CV (PDF)</span>
+                  <span>Descargar Perfil Profesional (PDF)</span>
                 </a>
               </div>
             )}
           </motion.div>
 
-          {/* Columna Derecha */}
+          {/* Columna Derecha: Canales de contacto */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -111,7 +112,7 @@ export default function Contact() {
                       <Icon className="w-5 h-5 text-text group-hover:text-accent" />
                     </div>
                     <div>
-                      <span className="block font-sans text-[11px] uppercase tracking-wider text-accent font-bold">
+                      <span className="block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-accent font-bold">
                         {item.label}
                       </span>
                       <span className="block font-serif-display text-lg sm:text-2xl text-text group-hover:text-accent transition-colors mt-0.5">

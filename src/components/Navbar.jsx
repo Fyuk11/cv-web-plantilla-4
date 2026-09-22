@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Scale, Menu, X, ArrowUpRight } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 import { portfolioData } from '../data/portfolioData';
 
@@ -8,86 +8,83 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Filosofía', href: '#filosofia' },
-    { name: 'Pilares', href: '#pilares' },
-    { name: 'Programas', href: '#programas' },
+    { name: 'Especialidades', href: '#especialidades' },
+    { name: 'Casos', href: '#casos' },
     { name: 'Trayectoria', href: '#trayectoria' },
-    { name: 'Comunidad', href: '#comunidad' },
+    { name: 'Contacto', href: '#contacto' },
   ];
 
-  const primaryActionUrl = portfolioData?.personalInfo?.skoolUrl || portfolioData?.personalInfo?.whatsappLink || '#contacto';
+  const primaryActionUrl = portfolioData?.contact?.calendlyUrl || portfolioData?.contact?.whatsapp || '#contacto';
 
   return (
-    <header className="sticky top-4 z-50 w-full px-4 sm:px-8 max-w-[1400px] mx-auto">
-      {/* Píldora Flotante Principal */}
-      <div className="bg-surface/85 backdrop-blur-md border border-line shadow-md hover:shadow-lg rounded-full px-4 sm:px-6 py-3 flex items-center justify-between transition-all duration-300">
+    <header className="sticky top-0 z-50 w-full bg-surface/95 backdrop-blur-md border-b border-line shadow-sm">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
         
-        {/* Isotipo & Marca */}
+        {/* Brand / Logo Corporativo */}
         <a href="#" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent font-serif-display text-lg font-bold transition-transform group-hover:scale-105">
-            RG
+          <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+            <Scale className="w-5 h-5" />
           </div>
           <div className="flex flex-col">
-            <span className="font-serif-display italic text-xl sm:text-2xl font-semibold leading-none text-text">
-              {portfolioData?.personalInfo?.name || "Rodrigo Gómez"}
+            <span className="font-serif-display text-xl font-bold tracking-wide text-text leading-none">
+              {portfolioData?.personalInfo?.name || "Dr. Julián Benítez"}
             </span>
-            <span className="flex items-center gap-1.5 text-[10px] font-sans text-text-muted tracking-wider uppercase mt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Community Architect
+            <span className="text-[10px] font-sans text-text-muted tracking-widest uppercase mt-1">
+              {portfolioData?.personalInfo?.credential || "Consultoría Legal"}
             </span>
           </div>
         </a>
 
-        {/* Navegación Desktop */}
-        <nav className="hidden lg:flex items-center gap-1 bg-bg/60 border border-line/60 rounded-full px-3 py-1.5">
+        {/* Desktop Links */}
+        <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide text-text-muted hover:text-text hover:bg-surface transition-all duration-200"
+              className="text-xs font-semibold tracking-widest uppercase text-text-muted hover:text-accent transition-colors"
             >
               {link.name}
             </a>
           ))}
         </nav>
 
-        {/* Acciones Desktop */}
-        <div className="hidden sm:flex items-center gap-3">
+        {/* Desktop Actions */}
+        <div className="hidden sm:flex items-center gap-4">
           <ThemeToggle />
           <a
             href={primaryActionUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white text-xs font-semibold px-4 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105"
+            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white text-xs font-bold tracking-wider uppercase px-6 py-3 rounded-lg transition-all shadow-sm hover:shadow-md hover:scale-105"
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Unirme a Skool</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>Agendar Consulta</span>
+            <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
 
-        {/* Trigger Mobile */}
+        {/* Mobile Menu Button */}
         <div className="flex sm:hidden items-center gap-2">
           <ThemeToggle />
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-2.5 rounded-full border border-line bg-surface text-text shadow-sm hover:border-accent transition-colors"
-            aria-label="Abrir menú"
+            className="p-2.5 rounded-lg border border-line bg-surface text-text shadow-sm hover:border-accent transition-colors"
+            aria-label="Toggle Menu"
           >
             {isMenuOpen ? <X className="w-5 h-5 text-accent" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Menú Desplegable Mobile */}
+      {/* Mobile Dropdown Menu */}
       {isMenuOpen && (
-        <div className="sm:hidden mt-2 bg-surface/95 backdrop-blur-xl border border-line rounded-3xl p-5 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top-3 duration-200">
-          <nav className="flex flex-col space-y-1">
+        <div className="sm:hidden bg-surface border-b border-line px-6 py-6 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+          <nav className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center justify-between text-text text-sm font-semibold py-3 px-4 rounded-2xl hover:bg-surface-hover hover:text-accent transition-all"
+                className="flex items-center justify-between text-text text-xs uppercase tracking-wider font-semibold py-2 border-b border-line/40 hover:text-accent transition-colors"
               >
                 <span>{link.name}</span>
                 <ArrowUpRight className="w-4 h-4 text-text-muted" />
@@ -95,29 +92,17 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="pt-2 border-t border-line space-y-2">
+          <div className="pt-2">
             <a
               href={primaryActionUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-hover text-white py-3 rounded-full text-xs font-bold tracking-wider uppercase shadow-md transition-all"
+              className="flex items-center justify-center gap-2 w-full bg-accent hover:bg-accent-hover text-white py-3 rounded-lg text-xs font-bold tracking-wider uppercase shadow-md transition-all"
             >
-              <Sparkles className="w-4 h-4" />
-              <span>Unirme a Skool</span>
+              <span>Agendar Consulta</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
-            {portfolioData?.personalInfo?.cvPdfPath && (
-              <a
-                href={portfolioData.personalInfo.cvPdfPath}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMenuOpen(false)}
-                className="flex items-center justify-center gap-2 w-full border border-line bg-surface text-text-muted hover:text-text py-2.5 rounded-full text-xs font-semibold tracking-wide transition-colors"
-              >
-                <span>Ver CV (PDF)</span>
-              </a>
-            )}
           </div>
         </div>
       )}

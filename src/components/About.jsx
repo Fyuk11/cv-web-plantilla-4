@@ -1,84 +1,72 @@
 import { motion } from 'framer-motion';
-import { Compass, CheckCircle2 } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 export default function About() {
   const about = portfolioData?.about || {};
 
   return (
-    // Cambiar id="sobre-mi" por:
-<section id="filosofia" className="py-8 sm:py-12 px-4 sm:px-8 max-w-[1400px] mx-auto">
-      <div className="bg-surface border border-line rounded-3xl p-6 sm:p-10 lg:p-14 shadow-sm relative overflow-hidden">
+    <section id="filosofia" className="py-16 sm:py-24 px-4 sm:px-8 max-w-[1400px] mx-auto border-t border-line">
+      
+      {/* Grid Editorial Principal */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         
-        {/* Trama orgánica de fondo */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none" />
+        {/* Columna Izquierda: Titular de Gran Formato */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="lg:col-span-5 space-y-6"
+        >
+          <h2 className="font-serif-display text-4xl sm:text-6xl lg:text-7xl text-text leading-[1.02] tracking-tight">
+            {about.headingMain || "Rigor jurídico,"} <br />
+            <span className="italic text-accent font-normal">
+              {about.headingSub || "visión estratégica."}
+            </span>
+          </h2>
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-          
-          {/* Columna Izquierda */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-5 space-y-6"
-          >
-            <div className="inline-flex items-center gap-2 bg-bg border border-line px-3.5 py-1.5 rounded-full text-xs font-bold text-accent shadow-sm">
-              <Compass className="w-3.5 h-3.5" />
-              <span>{about.title || "Manifiesto & Filosofía"}</span>
+          {about.subtitle && (
+            <p className="font-serif-display italic text-lg sm:text-xl text-text-muted leading-relaxed">
+              "{about.subtitle}"
+            </p>
+          )}
+        </motion.div>
+
+        {/* Columna Derecha: Manifiesto + Pilares Numerados */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="lg:col-span-7 space-y-12"
+        >
+          {/* Cita de impacto con barra de acento vertical */}
+          <div className="border-l-2 border-accent pl-6 sm:pl-8 py-1">
+            <p className="font-sans text-lg sm:text-xl text-text leading-relaxed font-normal">
+              {about.text || "Nos enfocamos en brindar soluciones jurídicas integrales diseñadas para proteger y potenciar empresas, startups y marcas de alto impacto, combinando excelencia técnica con una profunda comprensión del entorno comercial."}
+            </p>
+          </div>
+
+          {/* Pilares Estratégicos (Desplegados con líneas y números 01, 02, 03 - Sin Cajas) */}
+          {about.values && about.values.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 pt-8 border-t border-line">
+              {about.values.map((item, index) => (
+                <div key={index} className="space-y-3">
+                  <span className="font-serif-display italic text-accent text-2xl sm:text-3xl font-medium block">
+                    0{index + 1}.
+                  </span>
+                  <h3 className="font-sans text-xs font-bold text-text uppercase tracking-widest">
+                    {item.title}
+                  </h3>
+                  <p className="font-sans text-xs text-text-muted leading-relaxed font-normal">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
             </div>
+          )}
+        </motion.div>
 
-            <h2 className="font-serif-display text-4xl sm:text-5xl lg:text-6xl text-text leading-[1.05] tracking-tight">
-              Relaciones genuinas, <br />
-              <span className="italic text-accent font-normal">no solo seguidores.</span>
-            </h2>
-
-            {about.subtitle && (
-              <p className="font-serif-display italic text-lg sm:text-xl text-text-muted leading-relaxed pt-2">
-                "{about.subtitle}"
-              </p>
-            )}
-          </motion.div>
-
-          {/* Columna Derecha */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-7 space-y-6"
-          >
-            <div className="bg-bg/80 border border-line rounded-2xl p-6 sm:p-8 shadow-sm">
-              <p className="font-sans text-base sm:text-lg text-text leading-relaxed font-normal">
-                {about.text}
-              </p>
-            </div>
-
-            {about.values && about.values.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                {about.values.map((item, index) => (
-                  <div 
-                    key={index}
-                    className="bg-bg/50 border border-line rounded-2xl p-5 hover:border-accent/50 transition-colors duration-300 flex flex-col justify-between"
-                  >
-                    <div>
-                      <div className="w-8 h-8 rounded-full bg-accent/15 border border-accent/30 flex items-center justify-center text-accent mb-3">
-                        <CheckCircle2 className="w-4 h-4" />
-                      </div>
-                      <h3 className="font-sans text-sm font-bold text-text mb-1.5">
-                        {item.title}
-                      </h3>
-                      <p className="font-sans text-xs text-text-muted leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </motion.div>
-
-        </div>
       </div>
     </section>
   );

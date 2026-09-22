@@ -1,156 +1,127 @@
 export const portfolioData = {
   personalInfo: {
-    name: "Rodrigo Gómez",
-    role: "Digital Creator & Community Architect",
-    typingRoles: [
-      "Digital Creator & Community Architect",
-      "Educador & Ecosistemas Digitales",
-      "Growth & Gamification Specialist"
-    ],
-    tagline: "Transformando audiencias en comunidades vivas y sostenibles.",
-    bioShort: "Diseño ecosistemas de contenido, experiencias educativas y comunidades gamificadas en Skool que generan pertenencia y resultados reales.",
-    indicators: [
-      "+15K Miembros en Comunidad",
-      "98% Retención en Challenges",
-      "Sistemas de Trabajo en Notion"
-    ],
-    whatsappLink: "https://wa.me/5491121652703?text=%C2%A1Hola%20Rodrigo!%20Quiero%20consultarte%20por%20la%20creaci%C3%B3n%20de%20un%20ecosistema%20digital%20%2F%20comunidad.",
-    email: "rodrigogomez.digital@gmail.com",
-    linkedin: "https://www.linkedin.com/in/rodrigo-gomez-digital/",
-    github: "https://github.com/rodrigogomez",
-    skoolUrl: "https://www.skool.com",
-    cvPdfPath: "/CV_Rodrigo_Gomez.pdf",
-    activeChallenge: {
-      title: "Challenge 7 Días de Calma",
-      participants: "850+ Inscriptos",
-      status: "Edición Activa"
-    }
+    name: "Dr. Julián Benítez",
+    title: "Abogado Corporativo & Estratega Legal",
+    credential: "T° CXXI F° 890 - C.P.A.C.F.",
+    tagline: "Protección jurídica integral y estructuración de negocios para empresas, startups y marcas de alto impacto.",
+    location: "Buenos Aires, Argentina (Servicios Internacionales)",
+    avatarUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
+    about: {
+      philosophy: "En un entorno corporativo dinámico, la seguridad jurídica no debe ser un freno, sino un catalizador de crecimiento.",
+      description: "Más de 12 años asesorando a corporaciones, fondos de inversión y fundadores tech en fusiones, adquisiciones, cumplimiento normativo y protección de activos intangibles. Enfoque moderno, dinámico y libre de burocracia ineficiente.",
+      stats: [
+        { label: "Años de Ejercicio", value: "+12" },
+        { label: "Operaciones Cerradas", value: "+180" },
+        { label: "Retención de Clientes", value: "98%" },
+      ]
+    },
   },
 
-  about: {
-    title: "Manifiesto & Filosofía",
-    subtitle: "El valor no está en acumular seguidores, sino en construir relaciones genuinas.",
-    text: "Combino la arquitectura web con el diseño de comunidades y la educación digital. Tras llevar marcas desde cero a más de 15.000 seguidores activos y estructurar programas de aprendizaje gamificados en Skool, entendí que un verdadero ecosistema digital no es un simple curso: es una experiencia diaria apoyada en hábitos, regulación personal y dinámicas de interacción con propósito.",
-    values: [
-      {
-        title: "Educación con Hábito",
-        description: "Contenidos breves y retos diarios de 7 a 30 días para pasar directo a la práctica."
-      },
-      {
-        title: "Gamificación en Skool",
-        description: "Desbloqueo progresivo de cursos e insignias mediante la participación activa del alumno."
-      },
-      {
-        title: "Sistemas & Automatización",
-        description: "Organización de guiones, feedback de alumnos y entregas centralizadas en Notion."
-      }
-    ]
-  },
-
-  stack: [
+  // Áreas de Práctica (Reemplaza a "Stack")
+  practiceAreas: [
     {
-      category: "Comunidad & Gamificación",
-      items: ["Skool Platform", "Desafíos de 7 Días", "Sistema de Puntos", "Eventos Live", "Onboarding Fluidos"]
+      id: "m-and-a",
+      title: "Derecho Corporativo & M&A",
+      description: "Estructuración de sociedades, pactos de socios, rondas de inversión, fusiones y adquisiciones transfronterizas.",
+      icon: "Building2",
+      badge: "Corporativo"
     },
     {
-      category: "Ecosistemas & Contenido",
-      items: ["Scripts & Guiones de Reel", "Storytelling Orientado a Vínculo", "Mindfulness & Regulación", "Canva & CapCut", "Hotmart Checkout"]
+      id: "tech-ip",
+      title: "Propiedad Intelectual & Tech Law",
+      description: "Registro de marcas, patentes, licencias software, términos y condiciones SaaS y contratos de confidencialidad (NDA).",
+      icon: "ShieldCheck",
+      badge: "Digital"
     },
     {
-      category: "Sistemas & Analytics",
-      items: ["Notion OS (Feedback & Contenido)", "Make (Automatizaciones)", "GA4 & Meta Pixel", "React & Web Infrastructure"]
+      id: "compliance",
+      title: "Compliance & Protección de Datos",
+      description: "Adecuación a normativas GDPR/LPDP, auditorías legales y programas de prevención de riesgos corporativos.",
+      icon: "Scale",
+      badge: "Normativo"
+    },
+    {
+      id: "disputes",
+      title: "Resolución de Conflictos & Negociación",
+      description: "Mediación de disputas entre socios, arbitraje comercial y representación en litigios de alta complejidad.",
+      icon: "Gavel",
+      badge: "Estratégico"
     }
   ],
 
-  projects: [
+  // Casos Destacados / Proyectos
+  featuredCases: [
     {
       id: 1,
-      title: "Comunidad Skool — Calma & Vínculo",
-      description: "Ecosistema interactivo de aprendizaje con niveles gamificados, foro de consultas directas y desbloqueo de módulos exclusivos.",
-      category: "Comunidad",
-      tags: ["Skool", "Gamificación", "Comunidad"],
-      url: "https://www.skool.com/",
-      image: "/projects/skool.png"
+      title: "Adquisición Transfronteriza SaaS Fintech",
+      category: "M&A / Tech",
+      summary: "Estructuración legal del proceso de compra de un SaaS regional por parte de un holding internacional.",
+      impact: "Operación de USD 4.5M cerrada en 90 días con cero contingencias.",
+      tags: ["Due Diligence", "M&A", "Cross-Border"],
+      linkText: "Solicitar Referencia"
     },
     {
       id: 2,
-      title: "Challenge 7 Días de Calma",
-      description: "Reto intensivo guiado con prácticas diarias de regulación emocional, paseos conscientes y ejercicios de olfato activo.",
-      category: "Programa",
-      tags: ["Desafío", "Paseos Conscientes", "Bienestar"],
-      url: "https://www.skool.com/",
-      image: "/projects/desde-el-vinculo.png"
+      title: "Protección Global de Marca & IP",
+      category: "Propiedad Intelectual",
+      summary: "Estrategia de blindaje de registro de marca y patentes en Latinoamérica, EEUU y Unión Europea.",
+      impact: "Defensa exitosa de 14 marcas comerciales ante oposiciones registrarias.",
+      tags: ["Marcas", "IP", "Patentes"],
+      linkText: "Ver Metodología"
     },
     {
       id: 3,
-      title: "Notion OS — Tracker de Bienestar Canino",
-      description: "Sistema en Notion para tutores: registro de lenguaje corporal, bitácora de paseos y seguimiento de señales de calma.",
-      category: "Recursos",
-      tags: ["Notion OS", "Plantilla", "Organización"],
-      url: "https://notion.so",
-      image: "/projects/notion.png"
-    },
-    {
-      id: 4,
-      title: "Masterclass: Comunicación & Señales de Calma",
-      description: "Guía audiovisual para aprender a interpretar bostezos, giros de cabeza y tensiones antes de que se conviertan en reactividad.",
-      category: "Educación",
-      tags: ["Video Masterclass", "Lenguaje Canino"],
-      url: "https://youtube.com",
-      image: "/projects/youtube.png"
-    },
-    {
-      id: 5,
-      title: "Programa de Acompañamiento 1:1",
-      description: "Mentoría personalizada de transformación conductual y fortalecimiento del vínculo mediante entrenamiento respetuoso.",
-      category: "Asesoría",
-      tags: ["1 a 1", "Plan Personalizado", "Mentoría"],
-      url: "https://wa.me/",
-      image: "/projects/hotmart.png"
-    },
-    {
-      id: 6,
-      title: "Guía Digital: Olfato Activo & Estimulación",
-      description: "Ebook descargable con ejercicios prácticos para canalizar energía mental y reducir la ansiedad dentro y fuera del hogar.",
-      category: "Ebook",
-      tags: ["Ebook PDF", "Estimulación Mental"],
-      url: "https://gumroad.com",
-      image: "/projects/guia.png"
+      title: "Pacto de Socios & Vesting para Startup",
+      category: "Startups",
+      summary: "Redacción de acuerdo de accionistas, cláusulas Drag-Along / Tag-Along y esquemas de asignación de equity.",
+      impact: "Estructuración lista para auditoría de fondos de Venture Capital.",
+      tags: ["Equity", "Vesting", "Startups"],
+      linkText: "Consultar Caso"
     }
   ],
 
-  experience: [
+  // Trayectoria & Acreditaciones
+  career: [
     {
-      role: "Founder & Community Architect",
-      company: "Desde el Vínculo",
-      period: "2025 – Actualidad",
-      bullets: [
-        "Creación y gestión de una comunidad digital de más de 15.000 seguidores enfocada en bienestar y vínculo.",
-        "Diseño y ejecución del 'Challenge 7 Días de Calma', aumentando un 40% el engagement en canales digitales.",
-        "Arquitectura e implementación de la comunidad en Skool con reglas de desbloqueo de contenido por niveles."
-      ]
+      period: "2018 - Presente",
+      role: "Socio Principal",
+      institution: "Benítez & Asociados - Estudio Jurídico",
+      description: "Liderazgo del área de Práctica Corporativa y Propiedad Intelectual para empresas de tecnología y servicios."
     },
     {
-      role: "Co-Founder & Web Systems Lead",
-      company: "Traducción Creativa",
-      period: "2026 – Actualidad",
-      bullets: [
-        "Diseño de Landings y Hubs de contenido para educadores y consultores digitales.",
-        "Integración de automatizaciones de post-venta y captura de datos con Make, Notion y Hotmart."
-      ]
+      period: "2014 - 2018",
+      role: "Consultor Senior de Legales",
+      institution: "PwC / Big Four",
+      description: "Auditoría legal corporativa, estructuración fiscal y compliance para clientes corporativos de primera línea."
+    },
+    {
+      period: "2012 - 2014",
+      role: "Abogado Junior",
+      institution: "Marval, O'Farrell & Mairal",
+      description: "Litigios comerciales, contratos internacionales y trámites ante organismos reguladores."
     }
   ],
 
-  testimonials: [
+  // Formación & Certificaciones
+  academic: [
     {
-      quote: "El Challenge de 7 días transformó por completo la dinámica de nuestra comunidad. El nivel de participación diaria no lo habíamos logrado con ningún otro formato.",
-      author: "Camila R.",
-      role: "Miembro de la Comunidad"
+      year: "2016",
+      degree: "Máster en Derecho Empresario (LL.M.)",
+      institution: "Universidad Austral"
     },
     {
-      quote: "Tener todo el feedback organizado en Notion nos permitió lanzar exactamente el curso que los alumnos estaban pidiendo.",
-      author: "Martín G.",
-      role: "Educador & Creador de Contenido"
+      year: "2012",
+      degree: "Abogacía (Diploma de Honor)",
+      institution: "Universidad de Buenos Aires (UBA)"
     }
-  ]
+  ],
+
+  contact: {
+    office: "Av. del Libertador 4980, Piso 12, CABA",
+    email: "j.benitez@estudiobenitez.com",
+    phone: "+54 11 5555-4321",
+    calendlyUrl: "https://calendly.com",
+    linkedin: "https://linkedin.com",
+    whatsapp: "https://wa.me/541155554321"
+  }
 };

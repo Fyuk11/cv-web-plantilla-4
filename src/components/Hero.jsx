@@ -1,156 +1,131 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Sparkles, Users, Trophy, MessageCircle } from 'lucide-react';
+import { ArrowUpRight, Scale, Building2, MessageCircle, FileText } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 export default function Hero() {
-  const { personalInfo } = portfolioData;
+  const { personalInfo, contact } = portfolioData;
   const [imgError, setImgError] = useState(false);
 
+  // Mensaje automático para agendamiento directo por WhatsApp
+  const whatsappMessage = encodeURIComponent("Hola, me gustaría agendar una consulta profesional.");
+  const whatsappUrl = contact?.whatsapp 
+    ? `${contact.whatsapp}${contact.whatsapp.includes('?') ? '&' : '?'}text=${whatsappMessage}` 
+    : '#contacto';
+
+  const nameParts = personalInfo.name.split(' ');
+  const firstName = nameParts.slice(0, 1).join(' ');
+  const lastName = nameParts.slice(1).join(' ');
+
   return (
-    <section className="py-6 sm:py-10 px-4 sm:px-8 max-w-[1400px] mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+    <section className="py-10 sm:py-16 px-4 sm:px-8 max-w-[1400px] mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
-        {/* Columna Izquierda: Copy + Call To Actions + Active Challenge Badge */}
+        {/* Columna Izquierda: Presentación Editorial + CTAs */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="lg:col-span-7 bg-surface border border-line rounded-3xl p-6 sm:p-10 lg:p-12 flex flex-col justify-between shadow-sm relative overflow-hidden"
+          className="lg:col-span-7 space-y-8"
         >
-          {/* Trama orgánica de fondo */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
-
-          {/* Header Badge: Active Challenge Status */}
-          {personalInfo.activeChallenge && (
-            <div className="relative z-10 self-start inline-flex items-center gap-2.5 bg-bg border border-line px-4 py-2 rounded-full mb-8 shadow-sm">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-bold text-text tracking-wide uppercase">
-                {personalInfo.activeChallenge.status}:
-              </span>
-              <span className="text-xs text-accent font-semibold">
-                {personalInfo.activeChallenge.title}
-              </span>
-              <span className="text-[10px] bg-accent/15 text-accent px-2 py-0.5 rounded-full font-bold ml-1">
-                {personalInfo.activeChallenge.participants}
-              </span>
-            </div>
-          )}
-
-          {/* Copy Principal */}
-          <div className="relative z-10 space-y-6 my-auto">
-            <h1 className="font-serif-display text-5xl sm:text-7xl xl:text-8xl text-text leading-[0.95] tracking-tight">
-              {personalInfo.name.split(' ')[0]} <br />
+          {/* Headline & Copy Principal */}
+          <div className="space-y-6">
+            <h1 className="font-serif-display text-5xl sm:text-7xl xl:text-8xl text-text leading-[0.92] tracking-tight">
+              {firstName} <br />
               <span className="italic text-accent font-normal">
-                {personalInfo.name.split(' ').slice(1).join(' ')}
+                {lastName}
               </span>
             </h1>
 
-            <p className="font-sans text-lg sm:text-xl font-medium text-text leading-snug max-w-xl">
-              {personalInfo.tagline}
+            <p className="font-sans text-xl sm:text-2xl font-medium text-text leading-snug max-w-xl">
+              {personalInfo.title}
             </p>
 
             <p className="font-sans text-sm sm:text-base text-text-muted leading-relaxed max-w-xl font-normal">
-              {personalInfo.bioShort}
+              {personalInfo.tagline}
             </p>
           </div>
 
-          {/* Acciones & Indicadores de Impacto */}
-          <div className="relative z-10 pt-8 mt-8 border-t border-line space-y-8">
+          {/* Acciones de Agendamiento & Contacto Directo */}
+          <div className="pt-6 border-t border-line space-y-6">
             <div className="flex flex-wrap items-center gap-4">
               <a
-                href={personalInfo.skoolUrl || personalInfo.whatsappLink}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 bg-accent hover:bg-accent-hover text-white px-7 py-4 text-xs font-bold uppercase tracking-wider rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
+                className="group inline-flex items-center gap-3 bg-accent hover:bg-accent-hover text-white px-7 py-4 text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300 hover:scale-[1.01]"
               >
-                <Sparkles className="w-4 h-4" />
-                <span>Unirme a Skool</span>
+                <MessageCircle className="w-4 h-4" />
+                <span>Agendar Consulta</span>
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
 
               <a
-                href={personalInfo.whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-line bg-bg hover:bg-surface-hover text-text px-7 py-4 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300"
+                href="#contacto"
+                className="inline-flex items-center gap-2 border border-line hover:border-accent text-text px-7 py-4 text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300"
               >
-                <MessageCircle className="w-4 h-4 text-accent" />
-                <span>Hablar por WhatsApp</span>
+                <FileText className="w-4 h-4 text-accent" />
+                <span>Ver Contacto</span>
               </a>
             </div>
 
-            {/* Grid de Indicadores Rápidos */}
-            {personalInfo.indicators && (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {personalInfo.indicators.map((indicator, index) => (
-                  <div key={index} className="bg-bg/80 border border-line rounded-2xl p-3.5 flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-accent shrink-0" />
-                    <span className="text-xs font-semibold text-text leading-tight">
-                      {indicator}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
+            {/* Ubicación / Cobertura */}
+            <div className="flex items-center gap-2 text-xs font-medium text-text-muted">
+              <Building2 className="w-3.5 h-3.5 text-accent shrink-0" />
+              <span>{personalInfo.location}</span>
+            </div>
           </div>
         </motion.div>
 
-        {/* Columna Derecha: Tarjeta de Perfil & Métricas Flotantes */}
+        {/* Columna Derecha: Retrato Oficial & Métricas de Autoridad */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="lg:col-span-5 flex flex-col justify-between gap-6"
+          className="lg:col-span-5 flex flex-col justify-between gap-8"
         >
-          {/* Tarjeta con Foto de Perfil */}
-          <div className="bg-surface border border-line rounded-3xl p-4 sm:p-6 relative flex-1 flex items-center justify-center overflow-hidden group shadow-sm min-h-[420px]">
-            <div className="relative w-full h-full min-h-[380px] rounded-2xl overflow-hidden bg-bg border border-line">
-              {!imgError ? (
-                <img
-                  src="/profile.png"
-                  alt={personalInfo.name}
-                  onError={() => setImgError(true)}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              ) : (
-                <div className="w-full h-full flex flex-col justify-center items-center text-center p-6 text-text-muted font-sans text-xs">
-                  <Users className="w-8 h-8 text-accent mb-2" />
-                  <span>[Foto de Perfil]</span>
-                  <span className="mt-1 text-[10px] opacity-60">Cargá tu foto en /public/profile.png</span>
-                </div>
-              )}
-
-              {/* Overlay suave en Hover */}
-              <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-              {/* Tag Flotante Superior */}
-              <div className="absolute top-4 left-4 bg-surface/90 backdrop-blur-md border border-line px-3.5 py-1.5 rounded-full text-xs font-bold text-text shadow-sm flex items-center gap-2">
-                <Trophy className="w-3.5 h-3.5 text-accent" />
-                <span>Skool Top Creator</span>
+          {/* Fotografía Institucional con formato más alto (Vertical Editorial) */}
+          <div className="relative aspect-[3/4] sm:aspect-[3/4] lg:aspect-[2/3] w-full max-h-[580px] rounded-2xl overflow-hidden bg-surface border border-line group">
+            {!imgError ? (
+              <img
+                src={personalInfo.avatarUrl || "/profile.png"}
+                alt={personalInfo.name}
+                onError={() => setImgError(true)}
+                className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+              />
+            ) : (
+              <div className="w-full h-full flex flex-col justify-center items-center text-center p-6 text-text-muted font-sans text-xs">
+                <Scale className="w-10 h-10 text-accent mb-3" />
+                <span className="font-semibold text-text">{personalInfo.name}</span>
+                <span className="mt-1 text-[11px] opacity-70">{personalInfo.title}</span>
               </div>
+            )}
+
+            {/* Overlay Gradiente */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70 pointer-events-none" />
+
+            {/* Leyenda sobria integrada */}
+            <div className="absolute bottom-4 left-5 right-5 flex justify-between items-end text-white/90">
+              <span className="font-serif-display italic text-sm sm:text-base tracking-wide">Socio Principal</span>
+              <span className="text-[10px] font-mono tracking-widest uppercase opacity-75">Firma Legal</span>
             </div>
           </div>
 
-          {/* Tarjeta Inferior de Métricas Rápidas */}
-          <div className="bg-surface border border-line rounded-3xl p-6 shadow-sm grid grid-cols-2 gap-4">
-            <div className="bg-bg border border-line rounded-2xl p-4 text-center">
-              <span className="block font-serif-display italic text-3xl sm:text-4xl text-accent font-semibold">
-                +15K
-              </span>
-              <span className="block text-[11px] font-bold text-text-muted uppercase tracking-wider mt-1">
-                Miembros en Comunidad
-              </span>
+          {/* Métricas de Experiencia */}
+          {personalInfo.about?.stats && (
+            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-line">
+              {personalInfo.about.stats.map((stat, idx) => (
+                <div key={idx} className="space-y-1">
+                  <span className="block font-serif-display italic text-3xl sm:text-4xl text-accent font-semibold leading-none">
+                    {stat.value}
+                  </span>
+                  <span className="block text-[10px] font-bold text-text-muted uppercase tracking-wider leading-tight pt-1">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
             </div>
-            <div className="bg-bg border border-line rounded-2xl p-4 text-center">
-              <span className="block font-serif-display italic text-3xl sm:text-4xl text-text font-semibold">
-                98%
-              </span>
-              <span className="block text-[11px] font-bold text-text-muted uppercase tracking-wider mt-1">
-                Retención en Challenges
-              </span>
-            </div>
-          </div>
+          )}
 
         </motion.div>
 
