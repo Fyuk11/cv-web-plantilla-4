@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MessageSquare, FileText, ArrowUpRight } from 'lucide-react';
+import { Mail, MessageSquare, FileText, ArrowUpRight, Copy, Check } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 function LinkedinIcon({ className }) {
@@ -11,38 +12,29 @@ function LinkedinIcon({ className }) {
 }
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
   const personalInfo = portfolioData?.personalInfo || {};
   const name = personalInfo.name || personalInfo.fullName || 'Dr. Julián Benítez';
+  const email = personalInfo.email || 'j.benitez@estudio-benitez.com';
 
-  const contactLinks = [
-    {
-      label: 'Email Directo',
-      value: personalInfo.email || 'j.benitez@estudio-benitez.com',
-      href: `mailto:${personalInfo.email || 'j.benitez@estudio-benitez.com'}`,
-      icon: Mail,
-      external: false,
-    },
-    {
-      label: 'WhatsApp Profesional',
-      value: 'Consulta prioritaria',
-      href: personalInfo.whatsappLink || '#',
-      icon: MessageSquare,
-      external: true,
-    },
-    {
-      label: 'LinkedIn',
-      value: 'Perfil institucional',
-      href: personalInfo.linkedin || '#',
-      icon: LinkedinIcon,
-      external: true,
-    },
-  ];
+  // Mensaje prearmado para WhatsApp (Formato Argentina 54 9 + número)
+  const phone = '5491121652703';
+  const defaultMessage = encodeURIComponent('Hola Dr. Julián Benítez, quisiera realizar una consulta profesional.');
+  const whatsappUrl = personalInfo.whatsappLink || `https://wa.me/${phone}?text=${defaultMessage}`;
+  const linkedinUrl = personalInfo.linkedin || 'https://www.linkedin.com';
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
 
   return (
     <section id="contacto" className="py-12 sm:py-20 px-4 sm:px-8 max-w-[1400px] mx-auto">
       <div className="bg-surface border border-line rounded-3xl p-6 sm:p-10 lg:p-14 shadow-sm relative overflow-hidden">
         
-        {/* Trama de fondo tenue */}
+        {/* Trama de fondo */}
         <div className="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none" />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
@@ -55,7 +47,6 @@ export default function Contact() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-5 space-y-6"
           >
-            {/* Badge Status */}
             <div className="inline-flex items-center gap-2.5 bg-bg border border-line px-3.5 py-1.5 rounded-full text-xs font-bold text-text-muted shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
@@ -74,7 +65,7 @@ export default function Contact() {
               </p>
             </div>
 
-            {/* Descarga de CV / Brochure */}
+            {/* Descarga de CV */}
             {personalInfo.cvPdfPath && (
               <div className="pt-2">
                 <a
@@ -89,7 +80,7 @@ export default function Contact() {
             )}
           </motion.div>
 
-          {/* Columna Derecha: Canales de contacto */}
+          {/* Columna Derecha: Opciones de contacto */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -97,36 +88,87 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-7 bg-bg/80 border border-line rounded-2xl divide-y divide-line/60 overflow-hidden shadow-sm"
           >
-            {contactLinks.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={idx}
-                  href={item.href}
-                  target={item.external ? '_blank' : '_self'}
-                  rel={item.external ? 'noopener noreferrer' : ''}
-                  className="group flex items-center justify-between p-5 sm:p-6 hover:bg-surface/60 transition-all duration-300"
-                >
-                  <div className="flex items-center gap-4 sm:gap-5">
-                    <div className="p-3 rounded-xl border border-line bg-surface group-hover:border-accent/40 group-hover:bg-accent/10 group-hover:text-accent transition-all shrink-0">
-                      <Icon className="w-5 h-5 text-text group-hover:text-accent" />
-                    </div>
-                    <div>
-                      <span className="block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-accent font-bold">
-                        {item.label}
-                      </span>
-                      <span className="block font-serif-display text-lg sm:text-2xl text-text group-hover:text-accent transition-colors mt-0.5">
-                        {item.value}
-                      </span>
-                    </div>
-                  </div>
+            {/* 1. Opción Copiar Email */}
+            <button
+              type="button"
+              onClick={handleCopyEmail}
+              className="w-full text-left group flex items-center justify-between p-5 sm:p-6 hover:bg-surface/60 transition-all duration-300 cursor-pointer"
+            >
+              <div className="flex items-center gap-4 sm:gap-5">
+                <div className="p-3 rounded-xl border border-line bg-surface group-hover:border-accent/40 group-hover:bg-accent/10 group-hover:text-accent transition-all shrink-0">
+                  <Mail className="w-5 h-5 text-text group-hover:text-accent" />
+                </div>
+                <div>
+                  <span className="block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-accent font-bold">
+                    Email Directo (Haz clic para copiar)
+                  </span>
+                  <span className="block font-serif-display text-base sm:text-xl text-text group-hover:text-accent transition-colors mt-0.5">
+                    {email}
+                  </span>
+                </div>
+              </div>
 
-                  <div className="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-text-muted group-hover:text-accent group-hover:border-accent/40 group-hover:bg-accent/10 transition-all shrink-0">
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
-                </a>
-              );
-            })}
+              <div className="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-text-muted group-hover:text-accent group-hover:border-accent/40 group-hover:bg-accent/10 transition-all shrink-0">
+                {copied ? (
+                  <Check className="w-4 h-4 text-emerald-500" />
+                ) : (
+                  <Copy className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                )}
+              </div>
+            </button>
+
+            {/* 2. Opción WhatsApp */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between p-5 sm:p-6 hover:bg-surface/60 transition-all duration-300"
+            >
+              <div className="flex items-center gap-4 sm:gap-5">
+                <div className="p-3 rounded-xl border border-line bg-surface group-hover:border-accent/40 group-hover:bg-accent/10 group-hover:text-accent transition-all shrink-0">
+                  <MessageSquare className="w-5 h-5 text-text group-hover:text-accent" />
+                </div>
+                <div>
+                  <span className="block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-accent font-bold">
+                    WhatsApp
+                  </span>
+                  <span className="block font-serif-display text-lg sm:text-2xl text-text group-hover:text-accent transition-colors mt-0.5">
+                    Iniciar chat directo
+                  </span>
+                </div>
+              </div>
+
+              <div className="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-text-muted group-hover:text-accent group-hover:border-accent/40 group-hover:bg-accent/10 transition-all shrink-0">
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </div>
+            </a>
+
+            {/* 3. Opción LinkedIn */}
+            <a
+              href={linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between p-5 sm:p-6 hover:bg-surface/60 transition-all duration-300"
+            >
+              <div className="flex items-center gap-4 sm:gap-5">
+                <div className="p-3 rounded-xl border border-line bg-surface group-hover:border-accent/40 group-hover:bg-accent/10 group-hover:text-accent transition-all shrink-0">
+                  <LinkedinIcon className="w-5 h-5 text-text group-hover:text-accent" />
+                </div>
+                <div>
+                  <span className="block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-accent font-bold">
+                    LinkedIn
+                  </span>
+                  <span className="block font-serif-display text-lg sm:text-2xl text-text group-hover:text-accent transition-colors mt-0.5">
+                    Perfil institucional
+                  </span>
+                </div>
+              </div>
+
+              <div className="w-9 h-9 rounded-full bg-surface border border-line flex items-center justify-center text-text-muted group-hover:text-accent group-hover:border-accent/40 group-hover:bg-accent/10 transition-all shrink-0">
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </div>
+            </a>
+
           </motion.div>
 
         </div>
