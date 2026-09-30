@@ -95,7 +95,7 @@ export default function Hero() {
       loading="eager"
       width={450}
       height={600}
-      className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+      className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-transform duration-700 ease-out"
     />
   ) : (
     <div className="w-full h-full flex flex-col justify-center items-center text-center p-6 text-text-muted font-sans text-xs">
