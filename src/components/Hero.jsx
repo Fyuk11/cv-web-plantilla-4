@@ -86,20 +86,25 @@ export default function Hero() {
         >
           {/* Fotografía Institucional con formato más alto (Vertical Editorial) */}
           <div className="relative aspect-[3/4] sm:aspect-[3/4] lg:aspect-[2/3] w-full max-h-[580px] rounded-2xl overflow-hidden bg-surface border border-line group">
-            {!imgError ? (
-              <img
-                src={personalInfo.avatarUrl || "/profile.png"}
-                alt={personalInfo.name}
-                onError={() => setImgError(true)}
-                className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-              />
-            ) : (
-              <div className="w-full h-full flex flex-col justify-center items-center text-center p-6 text-text-muted font-sans text-xs">
-                <Scale className="w-10 h-10 text-accent mb-3" />
-                <span className="font-semibold text-text">{personalInfo.name}</span>
-                <span className="mt-1 text-[11px] opacity-70">{personalInfo.title}</span>
-              </div>
-            )}
+  {!imgError ? (
+    <img
+      src={personalInfo.avatarUrl || "/profile.png"}
+      alt={personalInfo.name}
+      onError={() => setImgError(true)}
+      fetchPriority="high"
+      loading="eager"
+      width={450}
+      height={600}
+      className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+    />
+  ) : (
+    <div className="w-full h-full flex flex-col justify-center items-center text-center p-6 text-text-muted font-sans text-xs">
+      <Scale className="w-10 h-10 text-accent mb-3" />
+      <span className="font-semibold text-text">{personalInfo.name}</span>
+      <span className="mt-1 text-[11px] opacity-70">{personalInfo.title}</span>
+    </div>
+  )}
+
 
             {/* Overlay Gradiente */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-70 pointer-events-none" />

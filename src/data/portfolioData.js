@@ -5,7 +5,7 @@ export const portfolioData = {
     credential: "T° CXXI F° 890 - C.P.A.C.F.",
     tagline: "Protección jurídica integral y estructuración de negocios para empresas, startups y marcas de alto impacto.",
     location: "Buenos Aires, Argentina (Servicios Internacionales)",
-    avatarUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
+    avatarUrl: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=75&w=450&fm=webp",
     about: {
       philosophy: "En un entorno corporativo dinámico, la seguridad jurídica no debe ser un freno, sino un catalizador de crecimiento.",
       description: "Más de 12 años asesorando a corporaciones, fondos de inversión y fundadores tech en fusiones, adquisiciones, cumplimiento normativo y protección de activos intangibles. Enfoque moderno, dinámico y libre de burocracia ineficiente.",
